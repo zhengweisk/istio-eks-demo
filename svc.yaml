@@ -1,0 +1,15 @@
+##################################################################################################
+# nginx-dev service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-dev
+  labels:
+    app: nginx-dev
+spec:
+  ports:
+    - port: 80
+      name: http
+  selector:
+    app: nginx-dev

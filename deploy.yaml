@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-dev
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: nginx-dev
+        version: v1
+    spec:
+      containers:
+        - name: nginx-dev
+          image: nginx:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20
